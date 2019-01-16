@@ -18,19 +18,20 @@ class Block:
 def create_genesis_block():
     return Block(0,datetime.datetime.now(), "Genesis Block", "0")
 
-def next_block(last_block):
+def next_block(last_block, data):
     this_index = last_block.index + 1
     this_timestamp = datetime.datetime.now()
-    this_data = "Hey, I'm block " + str(this_index)
+    this_data = data
     this_hash = last_block.hash
     return Block(this_index, this_timestamp, this_data, this_hash)
 
 def main():
     blockchain = [create_genesis_block()]
     previous_block = blockchain[0]
-    num_blocks = 20
+    num_blocks = int(input("How many blocks do you want to create? "))
     for i in range(num_blocks):
-        block_to_add = next_block(previous_block)
+        data = input("What would you like to put in this block? ")
+        block_to_add = next_block(previous_block, data)
         blockchain.append(block_to_add)
         previous_block = block_to_add
 
